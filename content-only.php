@@ -5,7 +5,7 @@ Plugin URI: http://www.seodenver.com/content-only/
 Description: Display only the post's content, without a theme, scripts or stylesheets.
 Author: Katz Web Services, Inc.
 Author URI: http://www.katzwebservices.com
-Version: 1.2
+Version: 1.3
 Text Domain: show-content-only
 */
 
@@ -80,47 +80,55 @@ class ShowContentOnly {
 	}
 
 	function meta_box() {
-		add_meta_box( 'contentonly', __( 'Show Content Only Links', 'show-content-only' ), array( $this, 'links' ), 'post', 'side', 'high' );
-		add_meta_box( 'contentonly', __( 'Show Content Only Links', 'show-content-only' ), array( $this, 'links' ), 'page', 'side', 'high' );
+		$args = array(
+			'public' => true
+		);
+		$types = get_post_types( $args );
+		foreach ( $types as $type ) {
+		add_meta_box( 'contentonly', __( 'Show Content Only Links', 'show-content-only' ), array(
+				$this,
+				'links'
+			), $type, 'side', 'high' );
+		}
 	}
 
 	// Meta box content
 	function links() {
 		global $post;
 		if ( isset( $post->ID ) && $post->ID != 0 ) {
-			$p        = $post->post_type == 'page' ? 'page_id' : 'p';
+			$p     = $post->post_type == 'page' ? 'page_id' : 'p';
 			$links = array(
-				'Content only' => array(
-					$p => $post->ID,
+				'Content only'               => array(
+					$p             => $post->ID,
 					'content-only' => true
 				),
-				'Content + Styles' => array(
-					$p => $post->ID,
+				'Content + Styles'           => array(
+					$p             => $post->ID,
 					'content-only' => true,
-					'css' => true
+					'css'          => true
 				),
-				'Content + Tags' => array(
-					$p => $post->ID,
+				'Content + Tags'             => array(
+					$p             => $post->ID,
 					'content-only' => true,
-					'tags' => true
+					'tags'         => true
 				),
-				'Content + Categories' => array(
-					$p => $post->ID,
+				'Content + Categories'       => array(
+					$p             => $post->ID,
 					'content-only' => true,
-					'categories' => true
+					'categories'   => true
 				),
 				'Content, Tags & Categories' => array(
-					$p => $post->ID,
+					$p             => $post->ID,
 					'content-only' => true,
-					'categories' => true,
-					'tags' => true
+					'categories'   => true,
+					'tags'         => true
 				),
 			);
 			if ( $links ) {
 				echo '<ul>';
 				foreach ( $links as $name => $link ) {
 					$link = htmlentities( add_query_arg( $link, get_option( 'home' ) . '/' ) );
-					echo '<li><a href="'. $link .'" class="button button-small">'. $name .'</a></li>';
+					echo '<li><a href="' . $link . '" class="button button-small">' . $name . '</a></li>';
 				}
 				echo '</ul>';
 			}

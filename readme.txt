@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=zackk
 Tags: content, formatting, strip formatting, strip content, text, SEO, keyword research, keyword research tool, google, keywords, tool
 Tested up to: 4.0
 Requires at least: 2.5
-Stable tag: trunk
+Stable tag: 1.3
 
 Display only the post or page content, without a theme, sidebars, scripts or stylesheets.
 
@@ -12,7 +12,7 @@ Display only the post or page content, without a theme, sidebars, scripts or sty
 
 Enables you to show only a post or page's content, without sidebars, footers, and other content.
 
-There are many different reasons for wanting to show just the content, but there's never been such an easy way to do it. This plugin adds a box in the post and page editor that provides you with four links:
+There are many different reasons for wanting to show just the content, but there's never been such an easy way to do it. This plugin adds a box in the post and page editor that provides you with five links:
 
 * Content Only
 * Content Only + Styles
@@ -29,9 +29,15 @@ This is very helpful in conjunction with the <a href="https://adwords.google.com
 
 == Screenshots ==
 
-1. Edit Posts Page
+1. Edit Posts Page (pre version 1.3)
 
 == Changelog ==
+
+= 1.3 =
+
+* Added links meta box to all public, registered post types
+* Formatted the links in nice little buttons
+* Refactored lots of code for clarity, standards compliance and greater flexibility
 
 = 1.2 =
 * Added option to print styles by adding `css=1` to the URL
