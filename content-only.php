@@ -1,15 +1,15 @@
 <?php
 /*
 Plugin Name: Show Content Only
-Plugin URI: http://www.seodenver.com/content-only/
+Plugin URI: https://katz.co/content-only/
 Description: Display only the post's content, without a theme, scripts or stylesheets.
 Author: Katz Web Services, Inc.
 Author URI: http://www.katzwebservices.com
-Version: 1.3
+Version: 1.3.1
 Text Domain: show-content-only
 */
 
-/*  Copyright 2011  Katz Web Services, Inc.  (email : info@katzwebdesign.com)
+/*  Copyright 2014  Katz Web Services, Inc.  (email : info@katzwebdesign.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -98,26 +98,26 @@ class ShowContentOnly {
 		if ( isset( $post->ID ) && $post->ID != 0 ) {
 			$p     = $post->post_type == 'page' ? 'page_id' : 'p';
 			$links = array(
-				'Content only'               => array(
+				__( 'Content only', 'show-content-only' )               => array(
 					$p             => $post->ID,
 					'content-only' => true
 				),
-				'Content + Styles'           => array(
+				__( 'Content + Styles', 'show-content-only' )           => array(
 					$p             => $post->ID,
 					'content-only' => true,
 					'css'          => true
 				),
-				'Content + Tags'             => array(
+				__( 'Content + Tags', 'show-content-only' )             => array(
 					$p             => $post->ID,
 					'content-only' => true,
 					'tags'         => true
 				),
-				'Content + Categories'       => array(
+				__( 'Content + Categories', 'show-content-only' )       => array(
 					$p             => $post->ID,
 					'content-only' => true,
 					'categories'   => true
 				),
-				'Content, Tags & Categories' => array(
+				__( 'Content, Tags & Categories', 'show-content-only' ) => array(
 					$p             => $post->ID,
 					'content-only' => true,
 					'categories'   => true,
@@ -128,12 +128,12 @@ class ShowContentOnly {
 				echo '<ul>';
 				foreach ( $links as $name => $link ) {
 					$link = htmlentities( add_query_arg( $link, get_option( 'home' ) . '/' ) );
-					echo '<li><a href="' . $link . '" class="button button-small">' . $name . '</a></li>';
+					echo '<li><a href="' . $link . '" class="button button-small">' . esc_html( $name ) . '</a></li>';
 				}
 				echo '</ul>';
 			}
 		} else {
-			echo '<p>' . __( 'You must publish or save this post before Show Content Only links become available.', 'show-content-only' ) . '</p>';
+			echo '<p>' . esc_html__( 'You must publish or save this post before Show Content Only links become available.', 'show-content-only' ) . '</p>';
 		}
 	}
 
@@ -168,7 +168,7 @@ class ShowContentOnly {
 		global $id, $post, $more, $page, $pages, $multipage, $preview, $pagenow;
 
 		if ( null === $more_link_text ) {
-			$more_link_text = __( '(more...)' );
+			$more_link_text = __( '(more...)', 'show-content-only' );
 		}
 
 		$output    = '';
@@ -233,4 +233,4 @@ class ShowContentOnly {
 	}
 }
 
-$showcontentonly = new ShowContentOnly();
+new ShowContentOnly;

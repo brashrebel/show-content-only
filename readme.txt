@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=zackk
 Tags: content, formatting, strip formatting, strip content, text, SEO, keyword research, keyword research tool, google, keywords, tool
 Tested up to: 4.0
 Requires at least: 2.5
-Stable tag: 1.3
+Stable tag: 1.3.1
 
 Display only the post or page content, without a theme, sidebars, scripts or stylesheets.
 
@@ -33,6 +33,9 @@ This is very helpful in conjunction with the <a href="https://adwords.google.com
 
 == Changelog ==
 
+= 1.3.1 =
+* Updated translation files
+
 = 1.3 =
 
 * Added links meta box to all public, registered post types
@@ -56,6 +59,15 @@ This is very helpful in conjunction with the <a href="https://adwords.google.com
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.3.1 =
+* Updated translation files
+
+= 1.3 =
+
+* Added links meta box to all public, registered post types
+* Formatted the links in nice little buttons
+* Refactored lots of code for clarity, standards compliance and greater flexibility
 
 = 1.2 =
 * Added option to print styles by adding `css=1` to the URL
