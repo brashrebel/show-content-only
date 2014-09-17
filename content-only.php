@@ -89,33 +89,41 @@ class ShowContentOnly {
 		global $post;
 		if ( isset( $post->ID ) && $post->ID != 0 ) {
 			$p        = $post->post_type == 'page' ? 'page_id' : 'p';
-			$url_none = htmlentities( add_query_arg( array( $p             => $post->ID,
-			                                                'content-only' => true
-					), get_option( 'home' ) . '/' ) );
-			$url_css  = htmlentities( add_query_arg( array( $p             => $post->ID,
-			                                                'content-only' => true,
-			                                                'css'          => true
-					), get_option( 'home' ) . '/' ) );
-			$url_all  = htmlentities( add_query_arg( array( $p             => $post->ID,
-			                                                'content-only' => true,
-			                                                'tags'         => true,
-			                                                'categories'   => true
-					), get_option( 'home' ) . '/' ) );
-			$url_tag  = htmlentities( add_query_arg( array( $p             => $post->ID,
-			                                                'content-only' => true,
-			                                                'tags'         => true
-					), get_option( 'home' ) . '/' ) );
-			$url_cat  = htmlentities( add_query_arg( array( $p             => $post->ID,
-			                                                'content-only' => true,
-			                                                'categories'   => true
-					), get_option( 'home' ) . '/' ) );
-			echo "<ul>
-				<li>" . __( 'Content Only:', 'show-content-only' ) . "<br /><a href='$url_none'>$url_none</a></li>
-				<li>" . __( 'Content + Styles:', 'show-content-only' ) . "<br /><a href='$url_css'>$url_css</a></li>
-				<li>" . __( 'Content, Tags &amp; Cats:', 'show-content-only' ) . "<br /><a href='$url_all'>$url_all</a></li>
-				<li>" . __( 'Content &amp; Tags:', 'show-content-only' ) . "<br /><a href='$url_tag'>$url_tag</a></li>
-				<li>" . __( 'Content &amp; Cats:', 'show-content-only' ) . "<br /><a href='$url_cat'>$url_cat</a></li>
-			</ul>";
+			$links = array(
+				'Content only' => array(
+					$p => $post->ID,
+					'content-only' => true
+				),
+				'Content + Styles' => array(
+					$p => $post->ID,
+					'content-only' => true,
+					'css' => true
+				),
+				'Content + Tags' => array(
+					$p => $post->ID,
+					'content-only' => true,
+					'tags' => true
+				),
+				'Content + Categories' => array(
+					$p => $post->ID,
+					'content-only' => true,
+					'categories' => true
+				),
+				'Content, Tags & Categories' => array(
+					$p => $post->ID,
+					'content-only' => true,
+					'categories' => true,
+					'tags' => true
+				),
+			);
+			if ( $links ) {
+				echo '<ul>';
+				foreach ( $links as $name => $link ) {
+					$link = htmlentities( add_query_arg( $link, get_option( 'home' ) . '/' ) );
+					echo '<li><a href="'. $link .'" class="button button-small">'. $name .'</a></li>';
+				}
+				echo '</ul>';
+			}
 		} else {
 			echo '<p>' . __( 'You must publish or save this post before Show Content Only links become available.', 'show-content-only' ) . '</p>';
 		}
