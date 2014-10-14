@@ -32,6 +32,7 @@ class ShowContentOnly {
 		add_action( 'init', array( $this, 'languages' ) );
 		add_action( 'wp', array( $this, 'keyword' ) );
 		add_action( 'admin_menu', array( $this, 'meta_box' ) );
+		add_action( 'admin_print_footer_scripts', array( $this, 'button' ) );
 	}
 
 	function languages() {
@@ -77,6 +78,18 @@ class ShowContentOnly {
 			echo '</body></html>';
 			die();
 		}
+	}
+
+	public function button() {
+
+		$button = "<a href='#' class='button button-small' onclick='contentPopup()'>Content Only</a>";
+
+		$output = '<script type="text/javascript">';
+		$output .= 'function contentPopup() {';
+		$output .= 'var url = alert("<a href=\"#\">hello</a>");';
+		$output .= '}';
+		$output .= 'document.getElementById("edit-slug-box").innerHTML += "' . $button . '";</script>';
+		echo $output;
 	}
 
 	function meta_box() {
